@@ -6,32 +6,31 @@
 set -eo pipefail
 IFS=$'\n\t'
 
-function main() {
-    case "$1" in
-    up)    up ;;
-    down)  down ;;
-    pause) pause ;;
-    *) echo "Usage: $0 {up|down|pause}" ;;
-    esac
-}
+__root="$(dirname "$(realpath "$0")")"
 
-function up() {
+source "${__root}"/../_lib/cli.sh
+
+function cmd_up() {
     kubectl apply -f resources/namespace.yaml
     kubectl apply -f resources/volume.yaml
     kubectl apply -f resources/service.yaml
     kubectl apply -f resources/deployment.yaml
 }
 
-function down() {
+function cmd_down() {
     kubectl delete -f resources/namespace.yaml
     kubectl delete -f resources/volume.yaml
     kubectl delete -f resources/service.yaml
     kubectl delete -f resources/deployment.yaml
 }
 
-function pause() {
+function cmd_pause() {
     kubectl delete -f resources/service.yaml
     kubectl delete -f resources/deployment.yaml
 }
 
-main $@
+function cmd_help() {
+    echo "Usage: $0 {up|down|pause}"
+}
+
+main "$@"

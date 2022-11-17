@@ -1,8 +1,1 @@
-.idea/.gitignore
-.idea/aws.xml
-.idea/checkstyle-idea.xml
-.idea/kubernetes.iml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
-.idea/sonarlint/issuestore/index.pb
+.idea
